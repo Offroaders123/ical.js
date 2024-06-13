@@ -3,4 +3,28 @@
   // type generation is handled by @rollup/plugin-typescript
 
   // this file exists because of https://github.com/rollup/plugins/issues/1572
+
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "module": "CommonJS",
+    "target": "ESNext",
+    "isolatedModules": true,
+    "noEmit": true,
+    "strict": true,
+    "strictNullChecks": false, // temp
+    // "noImplicitOverride": true,
+    // "noPropertyAccessFromIndexSignature": true,
+    // "noUncheckedIndexedAccess": true,
+    "allowUnreachableCode": false,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true
+  },
+  "exclude": [
+    "./dist/**/*"
+  ],
+  // Temp, this is to work on the source first
+  "include": [
+    "./lib/ical/**/*"
+  ]
 }
