@@ -17,28 +17,53 @@ bugfixing this library, please check if the fix can be upstreamed to libical.
 ## Sandbox and Validator
 
 If you want to try out ICAL.js right now, there is a
-[jsfiddle](http://jsfiddle.net/kewisch/227efboL/) set up and ready to use. Read on for documentation
-and example links.
+[jsfiddle](http://jsfiddle.net/kewisch/227efboL/) set up and ready to use.
 
-There is also a validator that demonstrates how to use the library in a webpage in the
-[tools/](https://github.com/kewisch/ical.js/tree/main/tools) subdirectory.
+The ICAL validator demonstrates how to use the library in a webpage, and helps verify iCalendar and
+jCal. [Try the validator online](http://kewisch.github.io/ical.js/validator.html)
 
-[Try the validator online](http://kewisch.github.io/ical.js/validator.html), it always uses the latest release of ICAL.js.
+The recurrence tester calculates occurrences based on a RRULE. It can be used to aid in
+creating test cases for the recurrence iterator.
+[Try the recurrence tester online](https://kewisch.github.io/ical.js/recur-tester.html).
 
 ## Installing
 
-You can install ICAL.js via [npm](https://www.npmjs.com/), if you would like to use it in Node.js:
-```
+ICAL.js has no dependencies and is written in modern JavaScript. You can install ICAL.js via
+[npm](https://www.npmjs.com/), if you would like to use it in Node.js:
+```bash
 npm install ical.js
 ```
+Then simply import it for use:
+```javascript
+import ICAL from "ical.js";
+```
 
-ICAL.js has no dependencies and is written in modern JavaScript. A version transpiled to ES5 is
-available as well. It should work in all versions of Node.js and modern browsers.
+If you are working with a browser, be aware this is an ES6 module:
+
+```html
+<script type="module">
+  import ICAL from "https://unpkg.com/ical.js";
+  document.querySelector("button").addEventListener("click", () => {
+    ICAL.parse(document.getElementById("txt").value);
+  });
+</script>
+```
+
+If you need to make use of a script tag, you can use the transpiled ES5 version:
+```html
+<script src="https://unpkg.com/ical.js/dist/ical.es5.cjs"></script>
+<textarea id="txt"></textarea>
+<button onclick="ICAL.parse(document.getElementById('txt').value)"></button>
+```
 
 ## Timezones
 The stock ical.js does not register any timezones, due to the additional size it brings. If you'd
 like to do timezone conversion, and the timezone definitions are not included in the respective ics
 files, you'll need to use `ical.timezones.js` or its minified counterpart.
+
+This file is not included in the distribution since it pulls in IANA timezones that might change
+regularly. See the github actions on building your own timezones during CI, or grab a recent build
+from main.
 
 ## Documentation
 
